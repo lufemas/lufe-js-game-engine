@@ -1,4 +1,37 @@
 
+class Bullet {
+  constructor(dad,x,y,w,h){
+    this.div = document.createElement("div");
+    this.div.classList.add("bullet");
+    this.div.style.position = "absolute";
+    this.div.style.left = x+"px";
+    this.div.style.top = y+"px";
+    this.div.style.width = w+"px";
+    this.div.style.height = h+"px";
+    this.div.style.backgroundColor = "white";
+    this.div.style.borderRadius = "50%";
+    dad.appendChild(this.div);
+    Bullet.allInstances.push(this);
+
+  }
+
+  static loop(){
+
+  //   for (let index = 0; index < Bullet.allInstances.length; index++) {
+  //     const element = Bullet.allInstances[index];
+  //     console.log(element.div.getClientRects()[0].y);
+  //     let newY =  element.div.getClientRects()[0].y - 2;
+  //     console.log(newY);
+  //     // element.div.style.top = newY + "px";
+  //   }
+    
+  // }
+
+  
+}
+
+Bullet.allInstances = [];
+
 const spaceShip = document.getElementById("space-ship");
 // const spaceShip.x = .spaceShip.;
 
@@ -11,6 +44,13 @@ spaceShip.changePos = (x,y)=>{
   spaceShip.style.left = x+"px";
   spaceShip.style.top = y+"px";
 }
+
+spaceShip.shot = ()=> {
+  const bullet = new Bullet(document.getElementById("game-vp"), spaceShip.x+(spaceShip.width/2)-4, spaceShip.y, 8, 20);
+  // console.log(this);
+}
+
+
 
 
 
@@ -49,7 +89,7 @@ function gameLoop(){
   if (keyState[32]){
     spaceShip.shot();
   } 
-  
+  Bullet.loop();
 }
 
 
